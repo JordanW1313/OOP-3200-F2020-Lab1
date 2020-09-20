@@ -31,7 +31,9 @@ public:
         issueDescription = "";
 
     }
-    WorkTicket(int ticketNumber, std::string id, std::string ticketDate, std::string description) // Parameterized constructor
+
+    // Parameterized constructor
+    WorkTicket(int ticketNumber, std::string id, std::string ticketDate, std::string description) 
     {
         workTicketNumber = ticketNumber;
         clientID = id;
@@ -96,7 +98,10 @@ int main()
     }
 }
 
-// Displays the object's attributes to the user.
+/// <summary>
+/// Displays the object's attributes to the user.
+/// </summary>
+/// <param name="myTicket"></param>
 void WorkTicket::ShowWorkTicket(WorkTicket myTicket)
 {
     std::cout << "Ticket Number: " << myTicket.workTicketNumber << std::endl;
@@ -106,28 +111,49 @@ void WorkTicket::ShowWorkTicket(WorkTicket myTicket)
     std::cout << "Issue Description: " << myTicket.issueDescription << std::endl << std::endl;
 }
 
-// Getters for WorkTicket class
+///////// Getters for WorkTicket class ////////////////
+
+/// <summary>
+/// retrieves work ticket number attribute value from a work ticket object
+/// </summary>
+/// <returns></returns>
 int WorkTicket::GetTicketNumber()
 {
     return workTicketNumber;
 }
 
+/// <summary>
+/// retrieves client id attribute value from a work ticket object
+/// </summary>
+/// <returns></returns>
 std::string WorkTicket::GetClientID()
 {
     return clientID;
 }
 
+/// <summary>
+/// retrieves work ticket date attribute value from a work ticket object
+/// </summary>
+/// <returns></returns>
 std::string WorkTicket::GetTicketDate()
 {
     return workTicketDate;
 }
 
+/// <summary>
+/// retrieves issue description attribute value from a work ticket object
+/// </summary>
+/// <returns></returns>
 std::string WorkTicket::GetIssueDescription()
 {
     return issueDescription;
 }
 
-// Setters for WorkTicket class.
+//////////// Setters for WorkTicket class. ///////////////
+
+/// <summary>
+/// sets all attributes of work ticket object only it all input is valid
+/// </summary>
 void WorkTicket::SetWorkTicket(/*int ticketNumber, std::string iD, std::string ticketDate, std::string description*/)
 {
     // Constants for minimum and maximum day/month/year that the user can enter.
@@ -226,21 +252,37 @@ void WorkTicket::SetWorkTicket(/*int ticketNumber, std::string iD, std::string t
     }
 }
 
+/// <summary>
+/// set the work ticket number attribute of work ticket object
+/// </summary>
+/// <param name="ticketNumber"></param>
 void WorkTicket::SetWorkTicketNumber(int ticketNumber)
 {    
     workTicketNumber = ticketNumber;    
 }
 
+/// <summary>
+/// set the client id attribute of work ticket object
+/// </summary>
+/// <param name="iD"></param>
 void WorkTicket::SetClientID(std::string iD)
 {
     clientID = iD;
 }
 
+/// <summary>
+/// set the work ticket date attribute of work ticket object
+/// </summary>
+/// <param name="ticketDate"></param>
 void WorkTicket::SetWorkTicketDate(std::string ticketDate)
 {
     workTicketDate = ticketDate;
 }
 
+/// <summary>
+/// set the issue description attribute of work ticket object
+/// </summary>
+/// <param name="description"></param>
 void WorkTicket::SetIssueDescription(std::string description)
 {
     issueDescription = description;
