@@ -135,7 +135,7 @@ void WorkTicket::SetWorkTicket(/*int ticketNumber, std::string iD, std::string t
     const int MAX_MONTH = 12;
     const int MAX_YEAR = 2099;
 
-    bool isValid = false;
+    bool isValid = true;
 
     int ticketNumber;
     std::string iD;
@@ -199,22 +199,22 @@ void WorkTicket::SetWorkTicket(/*int ticketNumber, std::string iD, std::string t
             else
             {
                 std::cout << "Issue Description must be greater than one character: ";
-                isValid = true;
+                isValid = false;
             }
         }
         else
         {
             std::cout << "Client ID must be greater than one character" << std::endl;
-            isValid = true;
+            isValid = false;
         }
     }
     catch (std::exception& ex)
     {
         std::cerr << ex.what() << "The Work ticket number cannot be less than 0.";
-        isValid = true;
+        isValid = false;
     }
 
-    if (isValid == false)
+    if (isValid == true)
     {
         std::cout << std::endl;
         SetWorkTicketNumber(ticketNumber);
