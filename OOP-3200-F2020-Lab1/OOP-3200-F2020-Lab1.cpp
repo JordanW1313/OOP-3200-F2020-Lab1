@@ -138,7 +138,8 @@ void WorkTicket::SetWorkTicket(/*int ticketNumber, std::string iD, std::string t
     const int MAX_MONTH = 12;
     const int MAX_YEAR = 2099;
 
-    bool isValid = false;
+
+    bool isValid = true; // isValid returns true if all inputs are valid.
 
     // Variables hold user input
     int ticketNumber;
