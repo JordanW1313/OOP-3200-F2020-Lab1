@@ -73,9 +73,7 @@ private:
 
 int main()
 {
-    //int a = ConsoleInput::ReadInteger(1, 2);
-
-    // Can change the array size if more tickets are needed.
+    // Array holds WorkTicket objs. Can change the array size if more tickets are needed.
     WorkTicket ticketArray [3];
 
     // Creating the first two ticket objs in ticketArray.
@@ -219,7 +217,7 @@ void WorkTicket::SetWorkTicket(/*int ticketNumber, std::string iD, std::string t
             strOut << month << "/" << day << "/" << year;
 
             std::cout << "Enter the issue description" << std::endl;
-            std::cin >> description;
+            std::getline (std::cin,description);
             if (description.length() > 0) // The description string is at least one character long.
             {
                 issueDescription = description;
