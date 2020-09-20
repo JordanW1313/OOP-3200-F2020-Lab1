@@ -1,0 +1,245 @@
+/****************************************************************
+* Name: Jordan Wriker & Ahmed Rizvi
+* Date: 18th September, 2020
+* Course: OOP-3200
+* File: OOP3200-F2020-Lab1
+* Purpose: The purpose of this program is to implement object oriented concepts to keep
+*          track of Work Tickets. Each Work Ticket is created as an object, and upon the
+*          launch of the program, the user is prompted to create their own Work Ticket
+*          object. The program then outputs all the Work Tickets, stored in an array, and 
+*          their attributes.
+*
+******************************************************************/
+
+#include <iostream>
+#include "MyConsoleInput.h" // ConsoleInput::ReadInteger()
+#include <string>
+#include <stdexcept>		// out_of_range
+#include <sstream>
+
+
+class WorkTicket
+{
+public:
+
+    // Default constructor
+    WorkTicket()
+    {
+        workTicketNumber = 0;
+        clientID = "";
+        workTicketDate = "1/1/2000";
+        issueDescription = "";
+
+    }
+    WorkTicket(int ticketNumber, std::string id, std::string ticketDate, std::string description) // Parameterized constructor
+    {
+        workTicketNumber = ticketNumber;
+        clientID = id;
+        workTicketDate = ticketDate;
+        issueDescription = description;
+    };
+
+    /**** Accessors ****/
+    static void ShowWorkTicket(WorkTicket);
+    
+    int GetTicketNumber();
+
+    std::string GetClientID();
+
+    std::string GetTicketDate();
+
+    std::string GetIssueDescription();
+    
+    /*** Mutators ***/
+    void SetWorkTicket();
+
+    void SetWorkTicketNumber(int ticketNumber);
+
+    void SetClientID(std::string iD);
+
+    void SetWorkTicketDate(std::string ticketDate);
+
+    void SetIssueDescription(std::string description);
+    
+private:
+    // Declaring the parameters of the WorkTicket obj
+    int workTicketNumber;
+    std::string clientID;
+    std::string workTicketDate;
+    std::string issueDescription;
+};
+
+int main()
+{
+    //int a = ConsoleInput::ReadInteger(1, 2);
+
+    // Can change the array size if more tickets are needed.
+    WorkTicket ticketArray [3];
+
+    // Creating the first two ticket objs in ticketArray.
+    ticketArray[0] = WorkTicket(1, "100698449", "1/1/2001", "This is the description for the very first work ticket in the array.");
+    ticketArray[1] = WorkTicket(2, "100441592", "2/2/2002", "This is the description for the very second work ticket in the array.");
+    
+
+    // Prompts the user to create tickets for the remaining number of empty indices of the ticket array.
+    for (int ticketIndex = 2; ticketIndex <= 2; ticketIndex++)
+    {
+        ticketArray[ticketIndex].WorkTicket::SetWorkTicket();
+        std::cout << std::endl;
+    }
+
+    // Displays all the attributes of each WorkTicket obj stored in the ticket array.
+    for (int ticketIndex = 0; ticketIndex <= 2; ticketIndex++)
+    {
+        ticketArray[ticketIndex].WorkTicket::ShowWorkTicket(ticketArray[ticketIndex]);
+        std::cout << std::endl;
+    }
+}
+
+// Displays the object's attributes to the user.
+void WorkTicket::ShowWorkTicket(WorkTicket myTicket)
+{
+    std::cout << "Ticket Number: " << myTicket.workTicketNumber << std::endl;
+    std::cout << "----------------------" << std::endl;
+    std::cout << "Client ID:" << myTicket.clientID << std::endl;
+    std::cout << "Ticket Date: " << myTicket.workTicketDate << std::endl;
+    std::cout << "Issue Description: " << myTicket.issueDescription << std::endl << std::endl;
+}
+
+int WorkTicket::GetTicketNumber()
+{
+    return workTicketNumber;
+}
+
+std::string WorkTicket::GetClientID()
+{
+    return clientID;
+}
+
+std::string WorkTicket::GetTicketDate()
+{
+    return workTicketDate;
+}
+
+std::string WorkTicket::GetIssueDescription()
+{
+    return issueDescription;
+}
+
+void WorkTicket::SetWorkTicket(/*int ticketNumber, std::string iD, std::string ticketDate, std::string description*/)
+{
+    const int MIN_DAY = 1;
+    const int MIN_MONTH = 1;
+    const int MIN_YEAR = 2000;
+    const int MAX_DAY = 31;
+    const int MAX_MONTH = 12;
+    const int MAX_YEAR = 2099;
+
+    bool isValid = false;
+
+    int ticketNumber;
+    std::string iD;
+    std::string description;
+    std::stringstream strOut;
+    int month;
+    int day;
+    int year;
+
+    std::cout << "Enter the work ticket number: ";
+    //std::cin >> ticketNumber;
+    try
+    {
+        ticketNumber = ConsoleInput::ReadInteger(1, 999999);
+
+        std::cout << "Enter the client ID: ";
+        std::cin >> iD;
+        if (iD.length() > 1)
+        {
+            std::cout << "Enter the month: ";
+            //std::cin >> month;
+            try
+            {
+                month = ConsoleInput::ReadInteger(MIN_MONTH, MAX_MONTH);
+            }
+            catch (std::exception& ex)
+            {
+                std::cerr << ex.what() << "The month must be a whole number between 1 and 12.";
+            }
+
+            std::cout << "Enter the day: ";
+            //std::cin >> day;
+            try
+            {
+                day = ConsoleInput::ReadInteger(MIN_DAY, MAX_DAY);
+            }
+            catch (std::exception& ex)
+            {
+                std::cerr << ex.what() << "The day must be a whole number between 1 and 31.";
+            }
+
+            std::cout << "Enter the Year: ";
+            //std::cin >> year;
+            try
+            {
+                year = ConsoleInput::ReadInteger(MIN_YEAR, MAX_YEAR);
+            }
+            catch (std::exception& ex) // The year either does not fall in the range, or is not an integer.
+            {
+                std::cerr << ex.what() << "The year must be a whole number between 2000 and 2099.";
+            }
+
+            strOut << month << "/" << day << "/" << year;
+
+            std::cout << "Enter the issue description" << std::endl;
+            std::cin >> description;
+            if (description.length() > 0) // The description string is at least one character long.
+            {
+                issueDescription = description;
+            }
+            else
+            {
+                std::cout << "Issue Description must be greater than one character: ";
+                isValid = true;
+            }
+        }
+        else
+        {
+            std::cout << "Client ID must be greater than one character" << std::endl;
+            isValid = true;
+        }
+    }
+    catch (std::exception& ex)
+    {
+        std::cerr << ex.what() << "The Work ticket number cannot be less than 0.";
+        isValid = true;
+    }
+
+    if (isValid == false)
+    {
+        std::cout << std::endl;
+        SetWorkTicketNumber(ticketNumber);
+        SetClientID(iD);
+        SetWorkTicketDate(strOut.str());
+        SetIssueDescription(description);
+    }
+}
+
+void WorkTicket::SetWorkTicketNumber(int ticketNumber)
+{    
+    workTicketNumber = ticketNumber;    
+}
+
+void WorkTicket::SetClientID(std::string iD)
+{
+    clientID = iD;
+}
+
+void WorkTicket::SetWorkTicketDate(std::string ticketDate)
+{
+    workTicketDate = ticketDate;
+}
+
+void WorkTicket::SetIssueDescription(std::string description)
+{
+    issueDescription = description;
+}
