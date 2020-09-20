@@ -81,7 +81,7 @@ int main()
     ticketArray[1] = WorkTicket(2, "100441592", "2/2/2002", "This is the description for the very second work ticket in the array.");
     
 
-    // Prompts the user to create tickets for the remaining number of empty indices of the ticket array.
+    // Prompts the user to create tickets for the remaining number of empty indices of the ticket array. User must alter number of loops to indicate number of array elements.
     for (int ticketIndex = 2; ticketIndex <= 2; ticketIndex++)
     {
         ticketArray[ticketIndex].WorkTicket::SetWorkTicket();
@@ -106,6 +106,7 @@ void WorkTicket::ShowWorkTicket(WorkTicket myTicket)
     std::cout << "Issue Description: " << myTicket.issueDescription << std::endl << std::endl;
 }
 
+// Getters for WorkTicket class
 int WorkTicket::GetTicketNumber()
 {
     return workTicketNumber;
@@ -126,8 +127,10 @@ std::string WorkTicket::GetIssueDescription()
     return issueDescription;
 }
 
+// Setters for WorkTicket class.
 void WorkTicket::SetWorkTicket(/*int ticketNumber, std::string iD, std::string ticketDate, std::string description*/)
 {
+    // Constants for minimum and maximum day/month/year that the user can enter.
     const int MIN_DAY = 1;
     const int MIN_MONTH = 1;
     const int MIN_YEAR = 2000;
@@ -135,8 +138,9 @@ void WorkTicket::SetWorkTicket(/*int ticketNumber, std::string iD, std::string t
     const int MAX_MONTH = 12;
     const int MAX_YEAR = 2099;
 
-    bool isValid = false;
+    bool isValid = false; // isValid returns true if all inputs are valid.
 
+    // Variables hold user input
     int ticketNumber;
     std::string iD;
     std::string description;
@@ -149,39 +153,36 @@ void WorkTicket::SetWorkTicket(/*int ticketNumber, std::string iD, std::string t
     //std::cin >> ticketNumber;
     try
     {
-        ticketNumber = ConsoleInput::ReadInteger(1, 999999);
+        ticketNumber = ConsoleInput::ReadInteger(1, 999999); // Checks if the ticket number is an integer.
 
         std::cout << "Enter the client ID: ";
         std::cin >> iD;
         if (iD.length() > 1)
         {
             std::cout << "Enter the month: ";
-            //std::cin >> month;
             try
             {
-                month = ConsoleInput::ReadInteger(MIN_MONTH, MAX_MONTH);
+                month = ConsoleInput::ReadInteger(MIN_MONTH, MAX_MONTH); // Month entered was within range.
             }
-            catch (std::exception& ex)
+            catch (std::exception& ex) // Month entered was out of range.
             {
                 std::cerr << ex.what() << "The month must be a whole number between 1 and 12.";
             }
 
             std::cout << "Enter the day: ";
-            //std::cin >> day;
             try
             {
-                day = ConsoleInput::ReadInteger(MIN_DAY, MAX_DAY);
+                day = ConsoleInput::ReadInteger(MIN_DAY, MAX_DAY); // Day entered was within range.
             }
-            catch (std::exception& ex)
+            catch (std::exception& ex) // Day entered was out of range.
             {
                 std::cerr << ex.what() << "The day must be a whole number between 1 and 31.";
             }
 
             std::cout << "Enter the Year: ";
-            //std::cin >> year;
             try
             {
-                year = ConsoleInput::ReadInteger(MIN_YEAR, MAX_YEAR);
+                year = ConsoleInput::ReadInteger(MIN_YEAR, MAX_YEAR); // Year entered was within range.
             }
             catch (std::exception& ex) // The year either does not fall in the range, or is not an integer.
             {
